@@ -13,9 +13,17 @@ switch ($action) {
     break;
 
   case 'display':
+
   default:
+  
     include "../models/PostManager.php";
     $posts = GetAllPosts();
+
+    if (isset($_GET["search"])) {
+
+      $search = $_GET["search"];
+      $posts = GetPostsWithLike($search);
+    }
 
     include "../models/CommentManager.php";
     $comments = array();
@@ -28,3 +36,5 @@ switch ($action) {
     include "../views/DisplayPosts.php";
     break;
 }
+
+
